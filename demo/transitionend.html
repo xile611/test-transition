@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>测试transitionend事件</title>
+  <style type="text/css">
+  .square {
+    width: 100px;
+    height: 100px;
+    background-color: #ff7300;
+  }
+  .active-square {
+    width: 800px;
+    transition: width 10s ease;
+  }
+  </style>
+</head>
+<body>
+  <button id="trigger">点击按钮开始持续10s的动画，请切换到浏览器其它标签页至少10s</button>
+  <div id="square" class="square"></div>
+  <script type="text/javascript">
+    var btn = document.getElementById('trigger');
+    var square = document.getElementById('square');
+    var startDate, endDate;
+
+    function getTime (date) {
+      return date.getHours() + ' : ' + date.getMinutes() + ' : ' + date.getSeconds();
+    }
+
+    btn.addEventListener('click', function () {
+      square.className = 'square active-square';
+
+      var msg =  document.createElement('p');
+      startDate = new Date();
+
+      msg.textContent = '动画开始时间  ' + getTime(startDate);
+      document.body.appendChild(msg);
+    });
+
+    square.addEventListener('transitionend', function () {
+      square.className = 'square';
+
+      var msg =  document.createElement('p');
+      endDate = new Date();
+
+      msg.textContent = '动画结束时间：' + getTime(endDate);
+      document.body.appendChild(msg);
+    });
+
+
+  </script>
+</body>
+</html>
