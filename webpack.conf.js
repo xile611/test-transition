@@ -3,10 +3,13 @@ module.exports = {
   watch: true,
   cache: true,
   devtool: 'inline-source-map',
-  entry: './demo/live-demo/index',
+  entry: {
+    'live-demo-react-v13': './demo/live-demo-react-v13/',
+    'live-demo-react-v14': './demo/live-demo-react-v14/'
+  },
   output: {
-    path: './demo/live-demo/',
-    filename: 'bundle.js'
+    path: './build/',
+    filename: '[name].js'
   },
   module: {
     loaders: [{

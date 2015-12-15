@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>测试transitionend事件</title>
+  <style type="text/css">
+  .square {
+    width: 100px;
+    height: 100px;
+    background-color: #ff7300;
+  }
+  .appended {
+    background-color: green;
+    height: 40px;
+    line-height: 40px;
+  }
+  @keyframes demo{
+    0% {
+      width: 100px;
+    }
+    100% {
+      width: 800px;
+    }
+  }
+  .active-square {
+    animation: demo 10s ease;
+  }
+  </style>
+</head>
+<body>
+  <button id="trigger">点击按钮开始持续10s的动画，请切换到浏览器其它标签页至少10s</button>
+  <div id="container">
+    <div id="square" class="square"></div>
+  </div>
+
+  <script type="text/javascript">
+    var btn = document.getElementById('trigger');
+    var square = document.getElementById('square');
+    var container = document.getElementById('container');
+    var startDate, endDate;
+
+    function getTime (date) {
+      return date.getHours() + ' : ' + date.getMinutes() + ' : '
+              + date.getSeconds();
+    }
+
+    btn.addEventListener('click', function () {
+      square.className = 'square active-square';
+
+      setTimeout(function () {
+        var div = document.createElement('div');
+        div.className = 'appended';
+        div.textContent = '中间插入的元素';
+
+        container.insertBefore(div, square);
+      }, 5000);
+
+      var msg =  document.createElement('p');
+      startDate = new Date();
+
+      msg.textContent = '动画开始时间  ' + getTime(startDate);
+      document.body.appendChild(msg);
+    });
+
+    square.addEventListener('animationend', function () {
+      square.className = 'square';
+
+      var msg =  document.createElement('p');
+      endDate = new Date();
+
+      msg.textContent = '动画结束时间：' + getTime(endDate);
+      document.body.appendChild(msg);
+    });
+
+
+  </script>
+</body>
+</html>

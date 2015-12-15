@@ -4,41 +4,24 @@
   <title>测试实时场景下ReactCSSTransitionGroup的bug</title>
   <style type="text/css">
   .list li {
-    width: 300px;
     list-style: none;
+  }
+  .list .item {
+    width: 300px;
     height: 30px;
     line-height: 30px;
     background-color: #ff7300;
     margin: 4px auto;
   }
-  .demo-appear {
+  .demo-appear, .demo-enter {
     opacity: 0;
     transform: rotateX(-135deg);
     transition: all 1s cubic-bezier(.36,-0.64,.34,1.76);
   }
-  .demo-appear.demo-appear-active {
-    opacity: 1;
-    transform: none;
-  }
-
-  .demo-enter {
-    opacity: 0;
-    transform: rotateX(-135deg);
-    transition: all 1s cubic-bezier(.36,-0.64,.34,1.76);
-  }
+  .demo-appear.demo-appear-active,
   .demo-enter.demo-enter-active {
     opacity: 1;
     transform: none;
-  }
-  .demo-leave {
-    opacity: 1;
-    transform: none;
-    transition: all 1s cubic-bezier(.36,-0.64,.34,1.76);
-  }
-
-  .demo-leave.demo-leave-active {
-    opacity: 0;
-    transform: rotateX(90deg);
   }
 
   </style>
@@ -47,6 +30,6 @@
   <div id="root">
 
   </div>
-<script type="text/javascript" src="bundle.js"></script>
+<script type="text/javascript" src="../../build/live-demo-react-v14.js"></script>
 </body>
 </html>

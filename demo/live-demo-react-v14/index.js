@@ -57,20 +57,29 @@ var Example = React.createClass({
 
   render() {
     var list = this.state.list;
-    var items = list.map(function(entry) {
+    var items = list.map(function(entry, i) {
       return (
-        <li key={'band-' + entry.id + '-' + entry.value}>
-          <p>{entry.name}</p>
-        </li>
+        <ReactCSSTransitionGroup
+          key={'band-' + i}
+          component='li'
+          transitionName='demo'
+          transitionAppear={true}
+          transitionEnter={true}
+          transitionLeave={false}
+          transitionAppearTimeout={1000}
+          transitionEnterTimeout={1000}>
+          <p className='item' key={'band-' + entry.id}>{entry.name}</p>
+        </ReactCSSTransitionGroup>
       );
     });
 
     return (
       <div>
-        <p className='title'>场景：这是一个实时榜单，每个10s排行榜会发生变化，需求是希望变化的时候添加动画</p>
-        <ReactCSSTransitionGroup component="ul" transitionName="demo" className="list">
+        <p className='title'>场景：这是一个实时榜单，每间隔 10s 会从服务端拿一次排行榜的数据，需求当内容的顺序发生变化的时候能够有动画。</p>
+        <p className='title'>说明：切换到浏览器其他标签页 2 min</p>
+        <ul className='list'>
           {items}
-        </ReactCSSTransitionGroup>
+        </ul>
       </div>
     );
   }
